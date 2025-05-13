@@ -68,12 +68,19 @@ CELERY_RESULT_BACKEND='django-db'
 
 ### 3. Build and Run with Docker
 
+> ⚠️ Pre-requisite : Install [Docker desktop](https://www.docker.com/products/docker-desktop/)
+
 ```bash
 docker compose build
 docker compose up
 ```
 
-### 4. Apply Migrations
+```
+Then visit:
+http://localhost:8000/admin – your Django admin dashboard (Username : admin / Password : Test@1234)
+```
+
+### 4. Apply Migrations (Optional)
 
 ```bash
 docker-compose exec web python manage.py migrate
