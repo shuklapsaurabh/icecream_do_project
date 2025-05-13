@@ -54,7 +54,7 @@ A Python(Django) based REST API to manage ice cream flavors, place orders, and v
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/icecream-api.git
+git clone https://github.com/shuklapsaurabh/icecream_do_project.git
 cd icecream-api
 ```
 
