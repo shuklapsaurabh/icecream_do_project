@@ -1,0 +1,10 @@
+Django>=4.2
+celery>=5.2
+redis>=5.0
+gunicorn>=21.2
+django-celery-results
+djangorestframework
+djangorestframework-simplejwt
+pytest
+pytest-django
+flower
