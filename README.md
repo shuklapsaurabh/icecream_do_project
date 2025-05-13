@@ -69,7 +69,8 @@ CELERY_RESULT_BACKEND='django-db'
 ### 3. Build and Run with Docker
 
 ```bash
-docker-compose up --build
+docker compose build
+docker compose up
 ```
 
 ### 4. Apply Migrations
