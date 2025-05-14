@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import patch
 from rest_framework.test import APIClient
 from django.contrib.auth.models import User
-from api.models import Flavor
+from api.models import Flavor, Order
 
 @pytest.mark.django_db
 @patch('api.views.process_payment.delay')
@@ -74,3 +74,29 @@ def test_list_orders():
     assert len(response.data) >= 1
     assert response.data[0]['flavor'] == flavor.id
     assert response.data[0]['quantity'] == 3
+    
+@pytest.mark.django_db
+def test_order_stats():
+    user = User.objects.create_user(username='statuser', password='statpass')
+    flavor1 = Flavor.objects.create(name='Vanilla')
+    flavor2 = Flavor.objects.create(name='Chocolate')
+
+    Order.objects.create(user=user, flavor=flavor1, quantity=3)
+    Order.objects.create(user=user, flavor=flavor1, quantity=2)
+    Order.objects.create(user=user, flavor=flavor2, quantity=2)
+
+    client = APIClient()
+    token = client.post('/api/token/', {'username': 'statuser', 'password': 'statpass'}).data['access']
+    client.credentials(HTTP_AUTHORIZATION='Bearer ' + token)
+    
+    print("Requesting order_stats")
+    response = client.get('/api/stats/')
+    print(f"Response status: {response.status_code}, data: {response.data}")
+    assert response.status_code == 200
+
+    data = response.data
+    flavor_totals = {item['flavor__name']: item['total_qty_ordered'] for item in data}
+    
+    print(f"Flavor totals: {flavor_totals}")
+    assert flavor_totals.get('Vanilla') == 5
+    assert flavor_totals.get('Chocolate') == 2

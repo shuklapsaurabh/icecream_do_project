@@ -294,6 +294,7 @@ Bearer Token: `{{access_token}}`
   - pytest -k test_add_flavor -s
   - pytest -k test_list_flavors -s
   - pytest -k test_list_orders -s
+  - pytest -k test_stats -s
 ```
 
 ---

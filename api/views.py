@@ -33,7 +33,7 @@ def add_flavor(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def order_stats(request):
-    data = Order.objects.values('flavor_name').annotate(total_qty_ordered=Sum('quantity'))
+    data = Order.objects.values('flavor__name').annotate(total_qty_ordered=Sum('quantity'))
     return Response(data)
 
 @api_view(['GET'])
