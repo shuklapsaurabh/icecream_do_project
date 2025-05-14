@@ -282,6 +282,22 @@ Bearer Token: `{{access_token}}`
 
 ---
 
+## Running Tests
+
+> Test case file location - api/tests.py
+
+#### Commands
+```
+- Run all test cases at once : pytest api/tests.py
+- Run individual test cases:
+  - pytest -k test_create_order -s
+  - pytest -k test_add_flavor -s
+  - pytest -k test_list_flavors -s
+  - pytest -k test_list_orders -s
+```
+
+---
+
 ## 📊 Tech Stack
 
 * Python 3.11
